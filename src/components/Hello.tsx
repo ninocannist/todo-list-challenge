@@ -5,6 +5,7 @@ const Title = styled.h1`
   background-color: hotpink;
   padding: 10px 20px;
   color: white;
+  border-radius: 10px;
 `;
 
 export interface HelloProps {
@@ -15,7 +16,7 @@ export interface HelloProps {
 function Hello(props: HelloProps) {
   return (
     <Title>
-      Hello from {props.compiler} and {props.framework}!
+      Hello frome {props.compiler} and {props.framework}!
     </Title>
   );
 }
