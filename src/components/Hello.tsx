@@ -5,7 +5,6 @@ const Title = styled.h1`
   background-color: hotpink;
   padding: 10px 20px;
   color: white;
-  border-radius: 10px;
 `;
 
 export interface HelloProps {
