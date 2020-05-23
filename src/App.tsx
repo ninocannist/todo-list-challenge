@@ -1,10 +1,12 @@
 import React from 'react';
-import Hello from './components/Hello';
+import ToDoList from './containers/ToDoList/ToDoList';
+import RecordMenu from './containers/RecordMenu/RecordMenu';
 
 export default function App() {
   return (
     <div>
-      <Hello compiler='ciaone' framework='builderi' />
+      <ToDoList />
+      <RecordMenu />
     </div>
   );
 }
