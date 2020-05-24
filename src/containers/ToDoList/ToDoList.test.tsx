@@ -4,10 +4,13 @@ import ToDoList from './ToDoList';
 
 describe('The scheleton is set up correctly', () => {
   test('renders learn react link', () => {
-    const { getByText } = render(<ToDoList />);
-    const addNewItem = getByText(/Add new item/i);
+    const { getByText, getByPlaceholderText } = render(<ToDoList />);
+    const newTaskName = getByPlaceholderText(/Buy groceries/i);
+    const newTaskDescription = getByPlaceholderText(/Milk, honey, pasta/i);
+    expect(newTaskName).toBeInTheDocument();
+    expect(newTaskDescription).toBeInTheDocument();
+
     const listOfItems = getByText(/List of items/i);
-    expect(addNewItem).toBeInTheDocument();
     expect(listOfItems).toBeInTheDocument();
   });
 });

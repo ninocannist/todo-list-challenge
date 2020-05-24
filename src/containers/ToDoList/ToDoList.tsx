@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import AddNewItem from './AddNewItem/AddNewItem';
+import TaskList from './TaskList/TaskList';
 
 const List = styled.div`
   background-color: orange;
@@ -11,8 +13,8 @@ const List = styled.div`
 function ToDoList() {
   return (
     <List>
-      <div>Add new item</div>
-      <div>List of items</div>
+      <AddNewItem />
+      <TaskList />
     </List>
   );
 }
