@@ -1,6 +1,7 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
 import AddNewItem from './AddNewItem';
+import { createStore } from 'redux';
+import { render, fireEvent, screen } from '../../../shared/test-utils';
 
 const setup = () => {
   const utils = render(<AddNewItem />);

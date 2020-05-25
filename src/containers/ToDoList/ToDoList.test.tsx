@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '../../shared/test-utils';
 import ToDoList from './ToDoList';
 
 describe('The scheleton is set up correctly', () => {

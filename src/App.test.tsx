@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, getByPlaceholderText } from '@testing-library/react';
+import { getByPlaceholderText } from '@testing-library/react';
+import { render } from './shared/test-utils';
 import App from './App';
 
 describe('The scheleton is set up correctly', () => {
