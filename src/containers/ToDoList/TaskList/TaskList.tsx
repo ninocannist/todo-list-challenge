@@ -11,7 +11,7 @@ interface IState {
 interface IProps {
   toDoList: { [key: string]: any };
   onUpdateTask: (task: Task) => void;
-  onDeleteTask: (taskID: string);
+  onDeleteTask: (taskID: string) => void;
 }
 
 interface Task {
@@ -80,11 +80,11 @@ class TaskList extends Component<IProps, IState> {
   };
 
   render() {
-    console.log(this.props.toDoList);
     return (
       <div>
         <h2>List of tasks</h2>
-        {this.props.toDoList.toDoList.length > 0 ? (
+        {'toDoList' in this.props.toDoList &&
+        this.props.toDoList.toDoList.length > 0 ? (
           <ul>
             {this.props.toDoList.toDoList.map((task: Task) => (
               <li key={task.ID}>
@@ -149,7 +149,7 @@ const MapStateToProps = (state: IState) => {
 const MapDispatchToProps = (dispatch: Dispatch) => {
   return {
     onUpdateTask: (task: Task) => dispatch(actions.updateTask(task)),
-    onDeleteTask: (taskID: string) => dispatch(actions.deleteTask(taskID))
+    onDeleteTask: (taskID: string) => dispatch(actions.deleteTask(taskID)),
   };
 };
 
