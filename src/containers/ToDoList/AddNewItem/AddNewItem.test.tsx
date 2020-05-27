@@ -1,7 +1,7 @@
 import React from 'react';
 import AddNewItem from './AddNewItem';
 import { createStore } from 'redux';
-import { render, fireEvent, screen } from '../../../shared/test-utils';
+import { render, fireEvent } from '../../../shared/test-utils';
 
 const setup = () => {
   const utils = render(<AddNewItem />);

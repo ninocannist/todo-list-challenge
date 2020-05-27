@@ -44,6 +44,14 @@ const deleteTask = (state: IState, action: IAction) => {
   return updateObject(state, { toDoList: updatedTasksList });
 };
 
+const resetList = (state: IState, action: IAction) => {
+  return updateObject(state, { toDoList: [] });
+};
+
+const resetListFailed = (state: IState, action: IAction) => {
+  return updateObject(state, { error: true });
+};
+
 const reducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case actionTypes.ADD_TASK:
@@ -52,6 +60,10 @@ const reducer = (state = initialState, action: IAction) => {
       return updateTask(state, action);
     case actionTypes.DELETE_TASK:
       return deleteTask(state, action);
+    case actionTypes.RESET_LIST:
+      return resetList(state, action);
+    case actionTypes.RESET_LIST_FAILED:
+      return resetListFailed(state, action);
     default:
       return state;
   }

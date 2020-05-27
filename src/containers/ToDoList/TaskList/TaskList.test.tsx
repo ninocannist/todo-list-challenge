@@ -10,16 +10,7 @@ const rootReducer = combineReducers({
 
 describe('The scheleton is set up correctly', () => {
   test('renders learn react link', () => {
-    const store = createStore(rootReducer, {
-      toDoList: [
-        {
-          ID: 'asdf',
-          name: 'ciaone',
-          description: 'verde',
-          created: 1590437064156,
-        },
-      ],
-    });
+    const store = createStore(rootReducer);
     const { getByText } = render(<TaskList />);
     const listOfTasks = getByText(/List of tasks/i);
     expect(listOfTasks).toBeInTheDocument();

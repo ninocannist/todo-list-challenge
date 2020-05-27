@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import toDoListReducer from './store/reducers/toDoList';
 import thunk from 'redux-thunk';
+import axios from 'axios';
 
 declare global {
   interface Window {
@@ -18,15 +19,35 @@ const rootReducer = combineReducers({
   toDoList: toDoListReducer,
 });
 
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
-);
+axios
+  .get('http://localhost:3000/current_state/')
+  .then((res) => {
+    const store = createStore(
+      rootReducer,
+      res.data,
+      composeEnhancers(applyMiddleware(thunk))
+    );
 
-const app = (
-  <Provider store={store}>
-    <App />
-  </Provider>
-);
+    const app = (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
 
-ReactDOM.render(app, document.getElementById('root'));
+    ReactDOM.render(app, document.getElementById('root'));
+  })
+  .catch((err) => {
+    const store = createStore(
+      rootReducer,
+      {},
+      composeEnhancers(applyMiddleware(thunk))
+    );
+
+    const app = (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
+
+    ReactDOM.render(app, document.getElementById('root'));
+  });

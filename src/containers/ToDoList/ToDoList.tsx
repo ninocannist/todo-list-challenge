@@ -4,9 +4,7 @@ import AddNewItem from './AddNewItem/AddNewItem';
 import TaskList from './TaskList/TaskList';
 
 const List = styled.div`
-  background-color: orange;
   padding: 10px 20px;
-  color: white;
   border-radius: 20px;
 `;
 

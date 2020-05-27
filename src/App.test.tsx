@@ -12,7 +12,11 @@ describe('The scheleton is set up correctly', () => {
     expect(newTaskName).toBeInTheDocument();
     expect(newTaskDescription).toBeInTheDocument();
 
-    const recordMenu = getByText(/Record Menu/i);
-    expect(recordMenu).toBeInTheDocument();
+    const play = getByText(/Play/i);
+    const reset = getByText(/Reset/i);
+    const record = getByText(/Record/i);
+    expect(play).toBeInTheDocument();
+    expect(reset).toBeInTheDocument();
+    expect(record).toBeInTheDocument();
   });
 });
