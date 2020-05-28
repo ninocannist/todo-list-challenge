@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server.js & npm run json:server",
     "server": "nodemon server.js",
-    "dev": "webpack-dev-server --mode development --open --hot",
+    "dev": "webpack-dev-server --mode development --open --hot & npm run json:server",
     "build": "webpack --mode production",
     "test": "jest",
     "test:watch": "jest --watch",
