@@ -1,46 +1,10 @@
 {
-  "tasks": [
-    {
-      "name": "fffff",
-      "description": "ffffffff",
-      "created": 1590683282260,
-      "id": 4
-    },
-    {
-      "name": "asdf",
-      "description": "asdf",
-      "created": 1590683549262,
-      "id": 6
-    },
-    {
-      "name": "asdf",
-      "description": "asdf",
-      "created": 1590683806298,
-      "id": 7
-    }
-  ],
+  "tasks": [],
   "recording": {
-    "value": false,
-    "initial_state": []
+    "value": 0,
+    "initial_state": [],
+    "actions": []
   },
-  "recorded_actions": [
-    {
-      "id": 1,
-      "type": "ADD_TASK"
-    },
-    {
-      "id": 2
-    },
-    {
-      "type": "read",
-      "one": "threee",
-      "id": 3
-    },
-    {
-      "type": "read",
-      "onee": "threeetttt",
-      "id": 4
-    }
-  ],
+  "actions": [],
   "before_replay_tasks": []
 }

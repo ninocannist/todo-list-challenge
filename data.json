@@ -1,8 +1,65 @@
 {
-  "tasks": [],
+  "tasks": [
+    {
+      "name": "a",
+      "description": "a",
+      "created": 1590786370433,
+      "id": 1
+    },
+    {
+      "name": "ae",
+      "description": "ae",
+      "created": 1590786372706,
+      "id": 2
+    },
+    {
+      "name": "aef",
+      "description": "aef",
+      "created": 1590786375126,
+      "id": 3
+    }
+  ],
   "recording": {
     "value": 0,
-    "initial_state": []
+    "initial_state": [],
+    "actions": [
+      {
+        "action": {
+          "type": "ADD_TASK",
+          "task": {
+            "name": "a",
+            "description": "a",
+            "created": 1590786370433,
+            "id": 1
+          }
+        },
+        "id": 1
+      },
+      {
+        "action": {
+          "type": "ADD_TASK",
+          "task": {
+            "name": "ae",
+            "description": "ae",
+            "created": 1590786372706,
+            "id": 2
+          }
+        },
+        "id": 2
+      },
+      {
+        "action": {
+          "type": "ADD_TASK",
+          "task": {
+            "name": "aef",
+            "description": "aef",
+            "created": 1590786375126,
+            "id": 3
+          }
+        },
+        "id": 3
+      }
+    ]
   },
   "actions": [],
   "before_replay_tasks": []

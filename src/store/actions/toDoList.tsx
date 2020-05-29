@@ -18,6 +18,7 @@ interface NewTask {
 interface Recording {
   value: number;
   initial_state: [];
+  actions: [];
 }
 
 interface FullAction {
@@ -203,6 +204,37 @@ export const deleteAction = (actionId: number) => {
         dispatch(deleteActionFromState(actionId));
       })
       .catch((error: any) => {
+        dispatch(resetListFailed());
+      });
+  };
+};
+
+export const addFullTask = (task: Task) => {
+  return (dispatch: Dispatch) => {
+    axios
+      .post('http://localhost:3000/tasks/', task)
+      .then((response: any) => {
+        const taskAdded = response.data;
+        console.log('Task Added: ', taskAdded);
+        const actionPerformed = {
+          type: actionTypes.ADD_TASK,
+          task: taskAdded,
+        };
+        axios
+          .post('http://localhost:3000/actions/', {
+            action: actionPerformed,
+          })
+
+          .then((response: any) => {
+            const fullAction = response.data;
+            dispatch(addTaskToState(fullAction));
+          })
+          .catch((error: any) => {
+            dispatch(resetListFailed());
+          });
+      })
+      .catch((error: any) => {
+        console.error('12', error);
         dispatch(resetListFailed());
       });
   };

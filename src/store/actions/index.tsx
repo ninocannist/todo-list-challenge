@@ -5,4 +5,5 @@ export {
   initList,
   record,
   deleteAction,
+  addFullTask,
 } from './toDoList';

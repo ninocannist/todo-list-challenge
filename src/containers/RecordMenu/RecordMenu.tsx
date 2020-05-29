@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import { Dispatch } from 'redux';
+import * as actionTypes from '../../store/actions/actionTypes';
 
 const Actions = styled.div`
   padding: 10px 20px;
@@ -19,11 +20,20 @@ interface IState {
   toDoList: { [key: string]: any };
 }
 
+interface NewTask {
+  name: string;
+  description: string;
+  created: number;
+}
+
 interface IProps {
   onListReset: () => void;
   onToggleRecord: (recording: Recording) => void;
   onDeleteTask: (taskId: number) => void;
   onDeleteAction: (actionId: number) => void;
+  onFullTaskAdded: (task: Task) => void;
+  onUpdateTask: (task: Task) => void;
+  onTaskAdded: (task: NewTask) => void;
   recording: Recording;
   toDoList: { [key: string]: any };
   actions: [];
@@ -39,6 +49,7 @@ interface Task {
 interface Recording {
   value: number;
   initial_state: [];
+  actions: [];
 }
 
 interface FullAction {
@@ -159,6 +170,7 @@ class RecordMenu extends Component<IProps, IState> {
     recording: {
       value: 0,
       initial_state: [],
+      actions: [],
     },
     toDoList: [],
     actions: [],
@@ -174,6 +186,27 @@ class RecordMenu extends Component<IProps, IState> {
 
   play = () => {
     console.log('play');
+    this.resetList();
+    this.props.recording.initial_state.forEach((task) => {
+      this.props.onFullTaskAdded(task);
+    });
+    this.props.recording.actions.forEach((action: FullAction) => {
+      switch (action.action.type) {
+        case actionTypes.DELETE_TASK:
+          this.props.onDeleteTask(action.action.taskId);
+        case actionTypes.UPDATE_TASK:
+          this.props.onUpdateTask(action.action.task);
+        case actionTypes.ADD_TASK:
+          const newTaskToAdd = {
+            name: action.action.task.name,
+            description: action.action.task.description,
+            created: action.action.task.created,
+          };
+          this.props.onTaskAdded(newTaskToAdd);
+        default:
+          console.log('Not processed: ', action);
+      }
+    });
   };
 
   resetList = () => {
@@ -187,15 +220,23 @@ class RecordMenu extends Component<IProps, IState> {
 
   record = () => {
     if (this.props.recording.value) {
-      const recording = {
+      const recording: Recording = {
         value: 0,
         initial_state: this.props.recording.initial_state,
+        actions: this.props.actions,
       };
       this.props.onToggleRecord(recording);
+      this.props.actions.forEach((element: FullAction) => {
+        this.props.onDeleteAction(element.id);
+      });
     } else {
-      const recording = {
+      this.props.actions.forEach((element: FullAction) => {
+        this.props.onDeleteAction(element.id);
+      });
+      const recording: Recording = {
         value: 1,
         initial_state: this.props.toDoList.toDoList,
+        actions: [],
       };
       this.props.onToggleRecord(recording);
     }
@@ -225,6 +266,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       dispatch<any>(actions.record(recording)),
     onDeleteAction: (actionId: number) =>
       dispatch<any>(actions.deleteAction(actionId)),
+    onFullTaskAdded: (task: Task) => dispatch<any>(actions.addFullTask(task)),
+    onUpdateTask: (task: Task) => dispatch<any>(actions.updateTask(task)),
+    onTaskAdded: (task: NewTask) => dispatch<any>(actions.addTask(task)),
   };
 };
 
