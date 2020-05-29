@@ -1,26 +1,41 @@
 {
-  "current_state": {
-    "toDoList": {
-      "toDoList": [
-        {
-          "ID": "0ccca7f0-7dca-48e4-aaf2-626535a48ea2",
-          "name": "aaaaaa",
-          "description": "aaaaaaaaaaad",
-          "created": 1590582532950
-        },
-        {
-          "ID": "f0876c3d-bb6b-4e7e-8bdb-e89dfe7d9703",
-          "name": "bbbbbbbb",
-          "description": "bbbbbbbd",
-          "created": 1590582543866
-        },
-        {
-          "ID": "6078f702-754c-4b8b-9c52-52a1cb26bb35",
-          "name": "ccccccccccc",
-          "description": "cccccccccccd",
-          "created": 1590582546188
-        }
-      ]
+  "tasks": [
+    {
+      "name": "eeeeeeeeeee",
+      "description": "eeee",
+      "created": 1590582546188,
+      "id": 6
+    },
+    {
+      "name": "asdf",
+      "description": "asdf",
+      "created": 1590683806298,
+      "id": 7
     }
-  }
+  ],
+  "recording": {
+    "value": 0,
+    "initial_state": [
+      {
+        "name": "eeeeeeeeeee",
+        "description": "eeee",
+        "created": 1590582546188,
+        "id": 6
+      },
+      {
+        "name": "asdf",
+        "description": "asdf",
+        "created": 1590683806298,
+        "id": 7
+      },
+      {
+        "name": "fffff",
+        "description": "fffff",
+        "created": 1590733076663,
+        "id": 8
+      }
+    ]
+  },
+  "recorded_actions": [],
+  "before_replay_tasks": []
 }

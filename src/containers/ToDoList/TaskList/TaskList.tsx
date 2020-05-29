@@ -11,18 +11,18 @@ interface IState {
 interface IProps {
   toDoList: { [key: string]: any };
   onUpdateTask: (task: Task) => void;
-  onDeleteTask: (taskID: string) => void;
+  onDeleteTask: (taskId: number) => void;
 }
 
 interface Task {
-  ID: string;
+  id: number;
   name: string;
   description: string;
   created: number;
 }
 
 const emptyTask = {
-  ID: '',
+  id: 0,
   name: '',
   description: '',
   created: 0,
@@ -41,7 +41,7 @@ class TaskList extends Component<IProps, IState> {
       return {
         ...oldState,
         editingTask: {
-          ID: oldState.editingTask.ID,
+          id: oldState.editingTask.id,
           name: newName,
           description: oldState.editingTask.description,
           created: oldState.editingTask.created,
@@ -57,7 +57,7 @@ class TaskList extends Component<IProps, IState> {
       return {
         ...oldState,
         editingTask: {
-          ID: oldState.editingTask.ID,
+          id: oldState.editingTask.id,
           name: oldState.editingTask.name,
           description: newDescription,
           created: oldState.editingTask.created,
@@ -75,8 +75,8 @@ class TaskList extends Component<IProps, IState> {
     this.setState({ editingTask: emptyTask });
   };
 
-  deleteTask = (taskID: string) => {
-    this.props.onDeleteTask(taskID);
+  deleteTask = (taskId: number) => {
+    this.props.onDeleteTask(taskId);
   };
 
   render() {
@@ -87,13 +87,13 @@ class TaskList extends Component<IProps, IState> {
         this.props.toDoList.toDoList.length > 0 ? (
           <ul>
             {this.props.toDoList.toDoList.map((task: Task) => (
-              <li key={task.ID}>
+              <li key={task.id}>
                 <label>
                   Name:
                   <input
                     placeholder='Buy groceries'
                     value={
-                      this.state.editingTask.ID === task.ID
+                      this.state.editingTask.id === task.id
                         ? this.state.editingTask.name
                         : task.name
                     }
@@ -102,7 +102,7 @@ class TaskList extends Component<IProps, IState> {
                     aria-label='new-task-name-to-add'
                     aria-required='true'
                     name='Task Name'
-                    readOnly={this.state.editingTask.ID !== task.ID}
+                    readOnly={this.state.editingTask.id !== task.id}
                   />
                 </label>
                 <label>
@@ -110,7 +110,7 @@ class TaskList extends Component<IProps, IState> {
                   <input
                     placeholder='Milk, honey, pasta'
                     value={
-                      this.state.editingTask.ID === task.ID
+                      this.state.editingTask.id === task.id
                         ? this.state.editingTask.description
                         : task.description
                     }
@@ -119,15 +119,15 @@ class TaskList extends Component<IProps, IState> {
                     aria-label='new-task-description-to-add'
                     aria-required='true'
                     name='Task Description'
-                    readOnly={this.state.editingTask.ID !== task.ID}
+                    readOnly={this.state.editingTask.id !== task.id}
                   />
                 </label>
-                {this.state.editingTask.ID === task.ID ? (
+                {this.state.editingTask.id === task.id ? (
                   <button onClick={() => this.updateTask()}>Save</button>
                 ) : (
                   <button onClick={() => this.editTask(task)}>Edit</button>
                 )}
-                <button onClick={() => this.deleteTask(task.ID)}>Delete</button>
+                <button onClick={() => this.deleteTask(task.id)}>Delete</button>
               </li>
             ))}
             <li></li>
@@ -148,8 +148,8 @@ const MapStateToProps = (state: IState) => {
 
 const MapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    onUpdateTask: (task: Task) => dispatch(actions.updateTask(task)),
-    onDeleteTask: (taskID: string) => dispatch(actions.deleteTask(taskID)),
+    onUpdateTask: (task: Task) => dispatch<any>(actions.updateTask(task)),
+    onDeleteTask: (taskId: number) => dispatch<any>(actions.deleteTask(taskId)),
   };
 };
 

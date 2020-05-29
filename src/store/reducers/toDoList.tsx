@@ -15,33 +15,37 @@ interface IAction {
 }
 
 const addTask = (state: IState, action: IAction) => {
-  return updateObject(state, { toDoList: [...state.toDoList, action.task] });
+  return updateObject(state, {
+    toDoList: { toDoList: [...state.toDoList.toDoList, action.task] },
+  });
 };
 
 const updateTask = (state: IState, action: IAction) => {
-  const indexOfToEdit = state.toDoList
-    .map((e: { [key: string]: any }) => e.ID)
-    .indexOf(action.task.ID);
-  const tasksBefore = state.toDoList.slice(0, indexOfToEdit);
-  const tasksAfter = state.toDoList.slice(
-    indexOfToEdit + 1,
-    state.toDoList.length
-  );
+  const tasksList = state.toDoList.toDoList;
+  const indexOfToEdit = tasksList
+    .map((e: { [key: string]: any }) => e.id)
+    .indexOf(action.task.id);
+  const tasksBefore = tasksList.slice(0, indexOfToEdit);
+  const tasksAfter = tasksList.slice(indexOfToEdit + 1, tasksList.length);
   const updatedTasksList = [...tasksBefore, action.task, ...tasksAfter];
-  return updateObject(state, { toDoList: updatedTasksList });
+  return updateObject(state, { toDoList: { toDoList: updatedTasksList } });
 };
 
 const deleteTask = (state: IState, action: IAction) => {
-  const indexOfToEdit = state.toDoList
-    .map((e: { [key: string]: any }) => e.ID)
-    .indexOf(action.taskID);
-  const tasksBefore = state.toDoList.slice(0, indexOfToEdit);
-  const tasksAfter = state.toDoList.slice(
-    indexOfToEdit + 1,
-    state.toDoList.length
-  );
+  const tasksList = state.toDoList.toDoList;
+  const indexOfToEdit = tasksList
+    .map((e: { [key: string]: any }) => e.id)
+    .indexOf(action.taskId);
+  const tasksBefore = tasksList.slice(0, indexOfToEdit);
+  const tasksAfter = tasksList.slice(indexOfToEdit + 1, tasksList.length);
   const updatedTasksList = [...tasksBefore, ...tasksAfter];
-  return updateObject(state, { toDoList: updatedTasksList });
+  return updateObject(state, { toDoList: { toDoList: updatedTasksList } });
+};
+
+const startRecord = (state: IState, action: IAction) => {
+  return updateObject(state, {
+    recording: action.recordingState,
+  });
 };
 
 const resetList = (state: IState, action: IAction) => {
@@ -64,6 +68,8 @@ const reducer = (state = initialState, action: IAction) => {
       return resetList(state, action);
     case actionTypes.RESET_LIST_FAILED:
       return resetListFailed(state, action);
+    case actionTypes.RECORD:
+      return startRecord(state, action);
     default:
       return state;
   }

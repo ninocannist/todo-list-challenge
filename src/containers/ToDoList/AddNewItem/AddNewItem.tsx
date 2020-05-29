@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/index';
-import { v4 as uuidv4 } from 'uuid';
 import { Dispatch } from 'redux';
 
 interface IState {
@@ -11,11 +10,10 @@ interface IState {
 }
 
 interface IProps {
-  onTaskAdded: (task: Task) => void;
+  onTaskAdded: (task: NewTask) => void;
 }
 
-interface Task {
-  ID: string;
+interface NewTask {
   name: string;
   description: string;
   created: number;
@@ -39,7 +37,6 @@ class AddNewItem extends Component<IProps, IState> {
 
   generateTask: () => void = () => {
     const taskObject = {
-      ID: uuidv4(),
       name: this.state.newTaskToAddName,
       description: this.state.newTaskToAddDescription,
       created: Date.now(),
@@ -83,7 +80,7 @@ class AddNewItem extends Component<IProps, IState> {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    onTaskAdded: (task: Task) => dispatch(actions.addTask(task)),
+    onTaskAdded: (task: NewTask) => dispatch<any>(actions.addTask(task)),
   };
 };
 

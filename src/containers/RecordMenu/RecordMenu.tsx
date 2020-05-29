@@ -15,10 +15,20 @@ const Actions = styled.div`
 
 interface IState {
   [key: string]: any;
+  recording: Recording;
+  toDoList: { [key: string]: any };
 }
 
 interface IProps {
   onListReset: () => void;
+  onToggleRecord: (recording: Recording) => void;
+  recording: Recording;
+  toDoList: { [key: string]: any };
+}
+
+interface Recording {
+  value: number;
+  initial_state: [];
 }
 
 const Play = styled.button`
@@ -130,7 +140,20 @@ const Record = styled.button`
 `;
 
 class RecordMenu extends Component<IProps, IState> {
-  state: IState = {};
+  state: IState = {
+    recording: {
+      value: 0,
+      initial_state: [],
+    },
+    toDoList: [],
+  };
+
+  componentDidMount() {
+    this.setState({
+      recording: this.props.recording,
+      toDoList: this.props.toDoList,
+    });
+  }
 
   play = () => {
     console.log('play');
@@ -141,15 +164,32 @@ class RecordMenu extends Component<IProps, IState> {
   };
 
   record = () => {
-    console.log('record');
+    if (this.props.recording.value) {
+      const recording = {
+        value: 0,
+        initial_state: this.props.recording.initial_state,
+      };
+      this.props.onToggleRecord(recording);
+    } else {
+      const recording = {
+        value: 1,
+        initial_state: this.props.toDoList.toDoList,
+      };
+      this.props.onToggleRecord(recording);
+    }
   };
 
   render() {
     return (
       <Actions>
-        <Play onClick={this.play}>Play</Play>
+        <Play onClick={this.play}>
+          {this.props.recording.value ? 'recording' : 'play'}
+        </Play>
         <Reset onClick={this.resetList}>Reset</Reset>
-        <Record onClick={this.record}>Record</Record>
+
+        <Record onClick={this.record}>
+          {this.props.recording.value ? 'Stop' : 'Record'}
+        </Record>
       </Actions>
     );
   }
@@ -158,7 +198,16 @@ class RecordMenu extends Component<IProps, IState> {
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     onListReset: () => dispatch<any>(actions.initList()),
+    onToggleRecord: (recording: Recording) =>
+      dispatch<any>(actions.record(recording)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(RecordMenu);
+const MapStateToProps = (state: IState) => {
+  return {
+    recording: state.recording,
+    toDoList: state.toDoList,
+  };
+};
+
+export default connect(MapStateToProps, mapDispatchToProps)(RecordMenu);

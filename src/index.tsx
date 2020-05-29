@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import toDoListReducer from './store/reducers/toDoList';
 import thunk from 'redux-thunk';
 import axios from 'axios';
@@ -15,16 +15,19 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const rootReducer = combineReducers({
-  toDoList: toDoListReducer,
-});
+const rootReducer = toDoListReducer;
 
 axios
-  .get('http://localhost:3000/current_state/')
+  .get('http://localhost:3000/db/')
   .then((res) => {
+    console.log('datas: ', res.data);
     const store = createStore(
       rootReducer,
-      res.data,
+      {
+        toDoList: { toDoList: res.data.tasks },
+        recording: res.data.recording,
+        recorded_actions: res.data.recorded_actions,
+      },
       composeEnhancers(applyMiddleware(thunk))
     );
 
