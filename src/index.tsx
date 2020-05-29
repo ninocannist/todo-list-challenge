@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, Action, Store } from 'redux';
 import toDoListReducer from './store/reducers/toDoList';
 import thunk from 'redux-thunk';
 import axios from 'axios';
@@ -26,7 +26,7 @@ axios
       {
         toDoList: { toDoList: res.data.tasks },
         recording: res.data.recording,
-        recorded_actions: res.data.recorded_actions,
+        actions: res.data.actions,
       },
       composeEnhancers(applyMiddleware(thunk))
     );

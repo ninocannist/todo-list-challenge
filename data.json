@@ -1,41 +1,9 @@
 {
-  "tasks": [
-    {
-      "name": "eeeeeeeeeee",
-      "description": "eeee",
-      "created": 1590582546188,
-      "id": 6
-    },
-    {
-      "name": "asdf",
-      "description": "asdf",
-      "created": 1590683806298,
-      "id": 7
-    }
-  ],
+  "tasks": [],
   "recording": {
     "value": 0,
-    "initial_state": [
-      {
-        "name": "eeeeeeeeeee",
-        "description": "eeee",
-        "created": 1590582546188,
-        "id": 6
-      },
-      {
-        "name": "asdf",
-        "description": "asdf",
-        "created": 1590683806298,
-        "id": 7
-      },
-      {
-        "name": "fffff",
-        "description": "fffff",
-        "created": 1590733076663,
-        "id": 8
-      }
-    ]
+    "initial_state": []
   },
-  "recorded_actions": [],
+  "actions": [],
   "before_replay_tasks": []
 }

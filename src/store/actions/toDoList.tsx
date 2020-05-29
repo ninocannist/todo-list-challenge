@@ -20,6 +20,13 @@ interface Recording {
   initial_state: [];
 }
 
+interface FullAction {
+  id: number;
+  action: {
+    [key: string]: any;
+  };
+}
+
 export const resetList = () => {
   return {
     type: actionTypes.RESET_LIST,
@@ -47,10 +54,10 @@ export const initList = () => {
   };
 };
 
-export const addTaskToState = (taskToAdd: NewTask) => {
+export const addTaskToState = (fullAction: FullAction) => {
   return {
     type: actionTypes.ADD_TASK,
-    task: taskToAdd,
+    fullAction: fullAction,
   };
 };
 
@@ -59,49 +66,103 @@ export const addTask = (taskToAdd: NewTask) => {
     axios
       .post('http://localhost:3000/tasks/', taskToAdd)
       .then((response: any) => {
-        dispatch(addTaskToState(response.data));
+        const taskAdded = response.data;
+        console.log('Task Added: ', taskAdded);
+        const actionPerformed = {
+          type: actionTypes.ADD_TASK,
+          task: taskAdded,
+        };
+        axios
+          .post('http://localhost:3000/actions/', {
+            action: actionPerformed,
+          })
+
+          .then((response: any) => {
+            const fullAction = response.data;
+            dispatch(addTaskToState(fullAction));
+          })
+          .catch((error: any) => {
+            dispatch(resetListFailed());
+          });
       })
       .catch((error: any) => {
+        console.error('12', error);
         dispatch(resetListFailed());
       });
   };
 };
 
-export const updateTaskToState = (taskToUpdate: Task) => {
+export const updateTaskToState = (fullAction: FullAction) => {
   return {
     type: actionTypes.UPDATE_TASK,
-    task: taskToUpdate,
+    fullAction: fullAction,
   };
 };
 
 export const updateTask = (taskToUpdate: Task) => {
   return (dispatch: Dispatch) => {
+    const actionPerformed = {
+      type: actionTypes.UPDATE_TASK,
+      task: taskToUpdate,
+    };
     axios
-      .patch('http://localhost:3000/tasks/' + taskToUpdate.id, taskToUpdate)
+      .post('http://localhost:3000/actions/', {
+        action: actionPerformed,
+      })
       .then((response: any) => {
-        dispatch(updateTaskToState(response.data));
+        const fullAction = response.data;
+        console.log('action performed: ', fullAction);
+        axios
+          .patch(
+            'http://localhost:3000/tasks/' + fullAction.action.task.id,
+            fullAction.action.task
+          )
+          .then((response: any) => {
+            dispatch(updateTaskToState(fullAction));
+          })
+          .catch((error: any) => {
+            dispatch(resetListFailed());
+          });
       })
       .catch((error: any) => {
+        console.error('12', error);
         dispatch(resetListFailed());
       });
   };
 };
 
-export const deleteTaskFromState = (taskId: number) => {
+export const deleteTaskFromState = (fullAction: FullAction) => {
   return {
     type: actionTypes.DELETE_TASK,
-    taskId: taskId,
+    fullAction: fullAction,
   };
 };
 
 export const deleteTask = (taskId: number) => {
   return (dispatch: Dispatch) => {
+    const actionPerformed = {
+      type: actionTypes.DELETE_TASK,
+      taskId: taskId,
+    };
     axios
-      .delete('http://localhost:3000/tasks/' + taskId)
+      .post('http://localhost:3000/actions/', {
+        action: actionPerformed,
+      })
       .then((response: any) => {
-        dispatch(deleteTaskFromState(taskId));
+        console.log('action performed: ', response.data);
+        const fullAction = response.data;
+        axios
+          .delete('http://localhost:3000/tasks/' + fullAction.action.taskId)
+          .then(() => {
+            dispatch(deleteTaskFromState(fullAction));
+          })
+          .catch((error: any) => {
+            console.error('12', error);
+            dispatch(resetListFailed());
+          });
       })
       .catch((error: any) => {
+        console.error('12', error);
         dispatch(resetListFailed());
       });
   };
@@ -120,6 +181,26 @@ export const record = (recordingState: Recording) => {
       .patch('http://localhost:3000/recording/', recordingState)
       .then((response: any) => {
         dispatch(startRecording(response.data));
+      })
+      .catch((error: any) => {
+        dispatch(resetListFailed());
+      });
+  };
+};
+
+export const deleteActionFromState = (actionId: number) => {
+  return {
+    type: actionTypes.DELETE_ACTION,
+    actionId: actionId,
+  };
+};
+
+export const deleteAction = (actionId: number) => {
+  return (dispatch: Dispatch) => {
+    axios
+      .delete('http://localhost:3000/actions/' + actionId)
+      .then((response: any) => {
+        dispatch(deleteActionFromState(actionId));
       })
       .catch((error: any) => {
         dispatch(resetListFailed());

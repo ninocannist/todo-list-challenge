@@ -22,13 +22,28 @@ interface IState {
 interface IProps {
   onListReset: () => void;
   onToggleRecord: (recording: Recording) => void;
+  onDeleteTask: (taskId: number) => void;
+  onDeleteAction: (actionId: number) => void;
   recording: Recording;
   toDoList: { [key: string]: any };
+  actions: [];
+}
+
+interface Task {
+  name: string;
+  description: string;
+  created: number;
+  id: number;
 }
 
 interface Recording {
   value: number;
   initial_state: [];
+}
+
+interface FullAction {
+  id: number;
+  action: { [key: string]: any };
 }
 
 const Play = styled.button`
@@ -146,12 +161,14 @@ class RecordMenu extends Component<IProps, IState> {
       initial_state: [],
     },
     toDoList: [],
+    actions: [],
   };
 
   componentDidMount() {
     this.setState({
       recording: this.props.recording,
       toDoList: this.props.toDoList,
+      actions: this.props.actions,
     });
   }
 
@@ -160,7 +177,12 @@ class RecordMenu extends Component<IProps, IState> {
   };
 
   resetList = () => {
-    this.props.onListReset();
+    this.props.toDoList.toDoList.forEach((element: Task) => {
+      this.props.onDeleteTask(element.id);
+    });
+    this.props.actions.forEach((element: FullAction) => {
+      this.props.onDeleteAction(element.id);
+    });
   };
 
   record = () => {
@@ -198,8 +220,11 @@ class RecordMenu extends Component<IProps, IState> {
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     onListReset: () => dispatch<any>(actions.initList()),
+    onDeleteTask: (taskId: number) => dispatch<any>(actions.deleteTask(taskId)),
     onToggleRecord: (recording: Recording) =>
       dispatch<any>(actions.record(recording)),
+    onDeleteAction: (actionId: number) =>
+      dispatch<any>(actions.deleteAction(actionId)),
   };
 };
 
@@ -207,6 +232,7 @@ const MapStateToProps = (state: IState) => {
   return {
     recording: state.recording,
     toDoList: state.toDoList,
+    actions: state.actions,
   };
 };
 
