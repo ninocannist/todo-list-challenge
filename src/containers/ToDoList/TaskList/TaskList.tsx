@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/index';
 import { Dispatch } from 'redux';
+import styled from '@emotion/styled';
+import moment from 'moment';
 
 interface IState {
   [key: string]: any;
@@ -27,6 +29,73 @@ const emptyTask = {
   description: '',
   created: 0,
 };
+
+const List = styled.ul`
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+  width: 100%;
+`;
+
+const ListElement = styled.li`
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 15px 0px;
+`;
+
+const Label = styled.label`
+  display: inline-block;
+  font-size: 14px;
+  width: 100%;
+  text-align: left;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  font-size: 17px;
+  border: 0px;
+  border-bottom: 1px solid #cfcfcf;
+  &:read-only {
+    border-bottom: 0px;
+  }
+`;
+
+const Edit = styled.button`
+  margin: 5px;
+  padding: 6px 11px;
+  border: 1px solid #277fff;
+  border-radius: 6px;
+  color: #277fff;
+  background-color: white;
+  font-size: 14px;
+  text-transform: uppercase;
+  &:active {
+    vertical-align: top;
+    padding: 7px 11px 5px;
+  }
+`;
+
+const Delete = styled.button`
+  margin: 5px;
+  padding: 6px 11px;
+  background-color: white;
+  border: 1px solid #ca0e00;
+  border-radius: 6px;
+  color: #ca0e00;
+  font-size: 14px;
+  text-transform: uppercase;
+  &:active {
+    vertical-align: top;
+    padding: 7px 11px 5px;
+  }
+`;
+
+const Actions = styled.div`
+  border-top: 1px solid grey;
+  margin-top: 10px;
+  padding: 10px;
+`;
 
 class TaskList extends Component<IProps, IState> {
   state: IState = {
@@ -82,15 +151,15 @@ class TaskList extends Component<IProps, IState> {
   render() {
     return (
       <div>
-        <h2>List of tasks</h2>
+        <h3>Tasks</h3>
         {'toDoList' in this.props.toDoList &&
         this.props.toDoList.toDoList.length > 0 ? (
-          <ul>
+          <List>
             {this.props.toDoList.toDoList.map((task: Task) => (
-              <li key={task.id}>
-                <label>
+              <ListElement key={task.id}>
+                <Label>
                   Name:
-                  <input
+                  <Input
                     placeholder='Buy groceries'
                     value={
                       this.state.editingTask.id === task.id
@@ -104,10 +173,10 @@ class TaskList extends Component<IProps, IState> {
                     name='Task Name'
                     readOnly={this.state.editingTask.id !== task.id}
                   />
-                </label>
-                <label>
+                </Label>
+                <Label>
                   Description:
-                  <input
+                  <Input
                     placeholder='Milk, honey, pasta'
                     value={
                       this.state.editingTask.id === task.id
@@ -121,17 +190,24 @@ class TaskList extends Component<IProps, IState> {
                     name='Task Description'
                     readOnly={this.state.editingTask.id !== task.id}
                   />
-                </label>
-                {this.state.editingTask.id === task.id ? (
-                  <button onClick={() => this.updateTask()}>Save</button>
-                ) : (
-                  <button onClick={() => this.editTask(task)}>Edit</button>
-                )}
-                <button onClick={() => this.deleteTask(task.id)}>Delete</button>
-              </li>
+                </Label>
+                <Label>
+                  Created:
+                  <div>{moment(task.created).fromNow()}</div>
+                </Label>
+                <Actions>
+                  {this.state.editingTask.id === task.id ? (
+                    <Edit onClick={() => this.updateTask()}>Save</Edit>
+                  ) : (
+                    <Edit onClick={() => this.editTask(task)}>Edit</Edit>
+                  )}
+                  <Delete onClick={() => this.deleteTask(task.id)}>
+                    Delete
+                  </Delete>
+                </Actions>
+              </ListElement>
             ))}
-            <li></li>
-          </ul>
+          </List>
         ) : (
           <span>Nessun task nella lista</span>
         )}

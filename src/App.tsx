@@ -3,6 +3,7 @@ import ToDoList from './containers/ToDoList/ToDoList';
 import RecordMenu from './containers/RecordMenu/RecordMenu';
 //import '@csstools/normalize.css';
 import styled from '@emotion/styled';
+import './App.css';
 
 const AppBody = styled.div`
   display: grid;

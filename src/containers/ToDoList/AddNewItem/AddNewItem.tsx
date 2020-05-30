@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/index';
 import { Dispatch } from 'redux';
+import styled from '@emotion/styled';
 
 interface IState {
   [key: string]: any;
@@ -18,6 +19,45 @@ interface NewTask {
   description: string;
   created: number;
 }
+
+const Box = styled.div``;
+
+const Form = styled.div`
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+`;
+
+const Label = styled.label`
+  display: inline-block;
+  margin: 9px 0px;
+  font-size: 15px;
+  width: 100%;
+  text-align: left;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  font-size: 17px;
+  border: 0px;
+  border-bottom: 1px solid #cfcfcf;
+`;
+
+const Button = styled.button`
+  margin: 5px 0px;
+  padding: 10px 15px;
+  background-color: #277fff;
+  border: 1px solid #277fff;
+  border-radius: 9px;
+  color: white;
+  font-size: 16px;
+  text-transform: uppercase;
+  &:active {
+    vertical-align: top;
+    padding: 11px 15px 9px;
+  }
+`;
 
 class AddNewItem extends Component<IProps, IState> {
   state: IState = {
@@ -47,33 +87,36 @@ class AddNewItem extends Component<IProps, IState> {
 
   render() {
     return (
-      <div>
-        <label>
-          Name:
-          <input
-            placeholder='Buy groceries'
-            value={this.state.newTaskToAddName}
-            onChange={this.updateNewTaskName}
-            type='text'
-            aria-label='new-task-name-to-add'
-            aria-required='true'
-            name='Task Name'
-          />
-        </label>
-        <label>
-          Description:
-          <input
-            placeholder='Milk, honey, pasta'
-            value={this.state.newTaskToAddDescription}
-            onChange={this.updateNewTaskDescription}
-            type='text'
-            aria-label='new-task-description-to-add'
-            aria-required='true'
-            name='Task Description'
-          />
-        </label>
-        <button onClick={this.generateTask}>Add Task +</button>
-      </div>
+      <Box>
+        <h3>Create New Task</h3>
+        <Form>
+          <Label>
+            Name
+            <Input
+              placeholder='Buy groceries'
+              value={this.state.newTaskToAddName}
+              onChange={this.updateNewTaskName}
+              type='text'
+              aria-label='new-task-name-to-add'
+              aria-required='true'
+              name='Task Name'
+            />
+          </Label>
+          <Label>
+            Description
+            <Input
+              placeholder='Milk, honey, pasta'
+              value={this.state.newTaskToAddDescription}
+              onChange={this.updateNewTaskDescription}
+              type='text'
+              aria-label='new-task-description-to-add'
+              aria-required='true'
+              name='Task Description'
+            />
+          </Label>
+          <Button onClick={this.generateTask}>Add Task +</Button>
+        </Form>
+      </Box>
     );
   }
 }

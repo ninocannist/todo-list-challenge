@@ -61,8 +61,8 @@ interface FullAction {
 }
 
 const Play = styled.button`
-  width: 76px;
-  height: 76px;
+  width: 65px;
+  height: 65px;
   text-align: center;
   margin: 0 auto;
   border-radius: 38px;
@@ -84,12 +84,12 @@ const Play = styled.button`
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1dfdeb",endColorstr="#0041ff",GradientType=1);
   color: white;
-  font-size: 18px;
+  font-size: 15px;
   border: none;
   padding: 5px;
-  &:hover {
-    width: 80px;
-    height: 80px;
+  &:active {
+    width: 69px;
+    height: 69px;
     -webkit-box-shadow: 5px 5px 10px 0px rgba(0, 133, 166, 1);
     -moz-box-shadow: 5px 5px 10px 0px rgba(0, 133, 166, 1);
     box-shadow: 5px 5px 10px 0px rgba(0, 133, 166, 1);
@@ -97,8 +97,8 @@ const Play = styled.button`
 `;
 
 const Reset = styled.button`
-  width: 76px;
-  height: 76px;
+  width: 65px;
+  height: 65px;
   text-align: center;
   margin: 0 auto;
   border-radius: 38px;
@@ -120,12 +120,12 @@ const Reset = styled.button`
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fde81d",endColorstr="#ff6200",GradientType=1);
   color: white;
-  font-size: 18px;
+  font-size: 15px;
   border: none;
   padding: 5px;
-  &:hover {
-    width: 80px;
-    height: 80px;
+  &:active {
+    width: 69px;
+    height: 69px;
     -webkit-box-shadow: 5px 5px 10px 0px rgba(255, 98, 0, 1);
     -moz-box-shadow: 5px 5px 10px 0px rgba(255, 98, 0, 1);
     box-shadow: 5px 5px 10px 0px rgba(255, 98, 0, 1);
@@ -133,8 +133,8 @@ const Reset = styled.button`
 `;
 
 const Record = styled.button`
-  width: 76px;
-  height: 76px;
+  width: 65px;
+  height: 65px;
   text-align: center;
   margin: 0 auto;
   border-radius: 38px;
@@ -156,12 +156,12 @@ const Record = styled.button`
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fd771d",endColorstr="#fd1d1d",GradientType=1);
   color: white;
-  font-size: 18px;
+  font-size: 15px;
   border: none;
   padding: 5px;
-  &:hover {
-    width: 80px;
-    height: 80px;
+  &:active {
+    width: 69px;
+    height: 69px;
     -webkit-box-shadow: 5px 5px 10px 0px rgba(253, 29, 29, 1);
     -moz-box-shadow: 5px 5px 10px 0px rgba(253, 29, 29, 1);
     box-shadow: 5px 5px 10px 0px rgba(253, 29, 29, 1);

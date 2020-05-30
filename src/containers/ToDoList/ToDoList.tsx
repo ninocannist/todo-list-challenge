@@ -4,7 +4,7 @@ import AddNewItem from './AddNewItem/AddNewItem';
 import TaskList from './TaskList/TaskList';
 
 const List = styled.div`
-  padding: 10px 20px;
+  padding: 10px;
   border-radius: 20px;
 `;
 

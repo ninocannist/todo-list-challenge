@@ -1,46 +1,30 @@
 {
-  "tasks": [
-    {
-      "name": "aaeeeeeeeeeeeee",
-      "description": "eeeeeeeeeeeeee",
-      "created": 1590837757733,
-      "id": 4
-    }
-  ],
+  "tasks": [],
   "recording": {
     "value": 0,
-    "initial_state": [
-      {
-        "id": 2,
-        "name": "eeeeea",
-        "description": "arffff",
-        "created": 1590831872488
-      },
-      {
-        "name": "ea",
-        "description": "efee",
-        "created": 1590831875201,
-        "id": 3
-      },
-      {
-        "name": "aaeeeeeeeeeeeee",
-        "description": "eeeeeeeeeeeeee",
-        "created": 1590837757733,
-        "id": 4
-      }
-    ],
+    "initial_state": [],
     "actions": [
       {
         "action": {
-          "type": "DELETE_TASK",
-          "taskId": 3
+          "type": "ADD_TASK",
+          "task": {
+            "name": "a",
+            "description": "a",
+            "created": 1590849305636,
+            "id": 1
+          }
         },
         "id": 1
       },
       {
         "action": {
-          "type": "DELETE_TASK",
-          "taskId": 2
+          "type": "UPDATE_TASK",
+          "task": {
+            "id": 1,
+            "name": "af",
+            "description": "af",
+            "created": 1590849305636
+          }
         },
         "id": 2
       }
@@ -51,51 +35,13 @@
       "action": {
         "type": "ADD_TASK",
         "task": {
-          "id": 2,
-          "name": "eeeeea",
-          "description": "arffff",
-          "created": 1590831872488
-        }
-      },
-      "id": 1
-    },
-    {
-      "action": {
-        "type": "ADD_TASK",
-        "task": {
-          "name": "ea",
-          "description": "efee",
-          "created": 1590831875201,
-          "id": 3
-        }
-      },
-      "id": 2
-    },
-    {
-      "action": {
-        "type": "ADD_TASK",
-        "task": {
-          "name": "aaeeeeeeeeeeeee",
-          "description": "eeeeeeeeeeeeee",
-          "created": 1590837757733,
-          "id": 4
+          "name": "a",
+          "description": "f",
+          "created": 1590853674811,
+          "id": 2
         }
       },
       "id": 3
-    },
-    {
-      "action": {
-        "type": "DELETE_TASK",
-        "taskId": 3
-      },
-      "id": 4
-    },
-    {
-      "action": {
-        "type": "DELETE_TASK",
-        "taskId": 2
-      },
-      "id": 5
     }
   ],
   "before_replay_tasks": []
