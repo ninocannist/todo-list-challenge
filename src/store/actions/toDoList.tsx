@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import { Dispatch } from 'redux';
+import { Dispatch, Action } from 'redux';
 import axios from 'axios';
 
 interface Task {
@@ -139,6 +139,13 @@ export const deleteTaskFromState = (fullAction: FullAction) => {
   };
 };
 
+export const deleteTaskFromStateWithoutLogging = (actionPerformed: Action) => {
+  return {
+    type: actionTypes.DELETE_TASK_WITHOUT_LOGGING,
+    actionPerformed: actionPerformed,
+  };
+};
+
 export const deleteTask = (taskId: number) => {
   return (dispatch: Dispatch) => {
     const actionPerformed = {
@@ -161,6 +168,26 @@ export const deleteTask = (taskId: number) => {
             console.error('12', error);
             dispatch(resetListFailed());
           });
+      })
+      .catch((error: any) => {
+        console.error('12', error);
+        dispatch(resetListFailed());
+      });
+  };
+};
+
+export const deleteTaskWithoutLogging = (taskId: number) => {
+  return (dispatch: Dispatch) => {
+    const actionPerformed = {
+      type: actionTypes.DELETE_TASK_WITHOUT_LOGGING,
+      taskId: taskId,
+    };
+    console.log('action performed: ', actionPerformed);
+    const fullAction = actionPerformed;
+    axios
+      .delete('http://localhost:3000/tasks/' + fullAction.taskId)
+      .then(() => {
+        dispatch(deleteTaskFromStateWithoutLogging(actionPerformed));
       })
       .catch((error: any) => {
         console.error('12', error);

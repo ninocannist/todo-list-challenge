@@ -6,4 +6,5 @@ export {
   record,
   deleteAction,
   addFullTask,
+  deleteTaskWithoutLogging,
 } from './toDoList';

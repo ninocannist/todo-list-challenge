@@ -18,6 +18,7 @@ interface IState {
   [key: string]: any;
   recording: Recording;
   toDoList: { [key: string]: any };
+  replay: boolean;
 }
 
 interface NewTask {
@@ -30,10 +31,12 @@ interface IProps {
   onListReset: () => void;
   onToggleRecord: (recording: Recording) => void;
   onDeleteTask: (taskId: number) => void;
+  onDeleteTaskWithoutLogging: (taskId: number) => void;
   onDeleteAction: (actionId: number) => void;
   onFullTaskAdded: (task: Task) => void;
   onUpdateTask: (task: Task) => void;
   onTaskAdded: (task: NewTask) => void;
+
   recording: Recording;
   toDoList: { [key: string]: any };
   actions: [];
@@ -174,45 +177,74 @@ class RecordMenu extends Component<IProps, IState> {
     },
     toDoList: [],
     actions: [],
+    replay: false,
   };
 
   componentDidMount() {
     this.setState({
       recording: this.props.recording,
-      toDoList: this.props.toDoList,
       actions: this.props.actions,
     });
   }
 
   play = () => {
-    console.log('play');
-    this.resetList();
-    this.props.recording.initial_state.forEach((task) => {
-      this.props.onFullTaskAdded(task);
-    });
-    this.props.recording.actions.forEach((action: FullAction) => {
-      switch (action.action.type) {
-        case actionTypes.DELETE_TASK:
-          this.props.onDeleteTask(action.action.taskId);
-        case actionTypes.UPDATE_TASK:
-          this.props.onUpdateTask(action.action.task);
-        case actionTypes.ADD_TASK:
-          const newTaskToAdd = {
-            name: action.action.task.name,
-            description: action.action.task.description,
-            created: action.action.task.created,
-          };
-          this.props.onTaskAdded(newTaskToAdd);
-        default:
-          console.log('Not processed: ', action);
-      }
-    });
+    if (!this.props.recording.value) {
+      this.setState({ replay: true });
+      console.log('play');
+      this.resetList();
+      setTimeout(() => {
+        this.props.recording.initial_state.forEach((task) => {
+          this.props.onFullTaskAdded(task);
+        });
+        setTimeout(() => {
+          console.log('Boh ', this.props.recording.actions);
+          this.props.recording.actions.forEach(
+            (action: FullAction, index: number) => {
+              setTimeout(() => {
+                switch (action.action.type) {
+                  case actionTypes.DELETE_TASK:
+                    console.log('S processed: ', action);
+                    this.props.onDeleteTask(action.action.taskId);
+                    break;
+                  case actionTypes.UPDATE_TASK:
+                    console.log('S processed: ', action);
+                    this.props.onUpdateTask(action.action.task);
+                    break;
+                  case actionTypes.ADD_TASK:
+                    console.log('S processed: ', action);
+                    const newTaskToAdd = {
+                      name: action.action.task.name,
+                      description: action.action.task.description,
+                      created: action.action.task.created,
+                    };
+                    this.props.onTaskAdded(newTaskToAdd);
+                    break;
+                  default:
+                    console.log('Not processed: ', action);
+                }
+              }, 2000 * index);
+            }
+          );
+          console.log('sleep');
+          this.setState({ replay: false });
+        }, 3000);
+      }, 3000);
+    }
   };
 
   resetList = () => {
-    this.props.toDoList.toDoList.forEach((element: Task) => {
-      this.props.onDeleteTask(element.id);
-    });
+    if (this.props.recording.value) {
+      console.log('reset 1');
+      this.props.toDoList.toDoList.forEach((element: Task) => {
+        this.props.onDeleteTask(element.id);
+      });
+    } else {
+      console.log('reset 2');
+      this.props.toDoList.toDoList.forEach((element: Task) => {
+        this.props.onDeleteTaskWithoutLogging(element.id);
+      });
+    }
+    console.log('reset 3');
     this.props.actions.forEach((element: FullAction) => {
       this.props.onDeleteAction(element.id);
     });
@@ -245,9 +277,12 @@ class RecordMenu extends Component<IProps, IState> {
   render() {
     return (
       <Actions>
-        <Play onClick={this.play}>
-          {this.props.recording.value ? 'recording' : 'play'}
-        </Play>
+        {this.state.replay ? (
+          <Play>Playing</Play>
+        ) : (
+          <Play onClick={this.play}>Replay</Play>
+        )}
+
         <Reset onClick={this.resetList}>Reset</Reset>
 
         <Record onClick={this.record}>
@@ -269,6 +304,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     onFullTaskAdded: (task: Task) => dispatch<any>(actions.addFullTask(task)),
     onUpdateTask: (task: Task) => dispatch<any>(actions.updateTask(task)),
     onTaskAdded: (task: NewTask) => dispatch<any>(actions.addTask(task)),
+    onDeleteTaskWithoutLogging: (taskId: number) =>
+      dispatch<any>(actions.deleteTaskWithoutLogging(taskId)),
   };
 };
 

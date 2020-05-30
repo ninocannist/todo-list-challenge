@@ -1,66 +1,102 @@
 {
   "tasks": [
     {
-      "name": "a",
-      "description": "a",
-      "created": 1590786370433,
-      "id": 1
-    },
-    {
-      "name": "ae",
-      "description": "ae",
-      "created": 1590786372706,
-      "id": 2
-    },
-    {
-      "name": "aef",
-      "description": "aef",
-      "created": 1590786375126,
-      "id": 3
+      "name": "aaeeeeeeeeeeeee",
+      "description": "eeeeeeeeeeeeee",
+      "created": 1590837757733,
+      "id": 4
     }
   ],
   "recording": {
     "value": 0,
-    "initial_state": [],
+    "initial_state": [
+      {
+        "id": 2,
+        "name": "eeeeea",
+        "description": "arffff",
+        "created": 1590831872488
+      },
+      {
+        "name": "ea",
+        "description": "efee",
+        "created": 1590831875201,
+        "id": 3
+      },
+      {
+        "name": "aaeeeeeeeeeeeee",
+        "description": "eeeeeeeeeeeeee",
+        "created": 1590837757733,
+        "id": 4
+      }
+    ],
     "actions": [
       {
         "action": {
-          "type": "ADD_TASK",
-          "task": {
-            "name": "a",
-            "description": "a",
-            "created": 1590786370433,
-            "id": 1
-          }
+          "type": "DELETE_TASK",
+          "taskId": 3
         },
         "id": 1
       },
       {
         "action": {
-          "type": "ADD_TASK",
-          "task": {
-            "name": "ae",
-            "description": "ae",
-            "created": 1590786372706,
-            "id": 2
-          }
+          "type": "DELETE_TASK",
+          "taskId": 2
         },
         "id": 2
-      },
-      {
-        "action": {
-          "type": "ADD_TASK",
-          "task": {
-            "name": "aef",
-            "description": "aef",
-            "created": 1590786375126,
-            "id": 3
-          }
-        },
-        "id": 3
       }
     ]
   },
-  "actions": [],
+  "actions": [
+    {
+      "action": {
+        "type": "ADD_TASK",
+        "task": {
+          "id": 2,
+          "name": "eeeeea",
+          "description": "arffff",
+          "created": 1590831872488
+        }
+      },
+      "id": 1
+    },
+    {
+      "action": {
+        "type": "ADD_TASK",
+        "task": {
+          "name": "ea",
+          "description": "efee",
+          "created": 1590831875201,
+          "id": 3
+        }
+      },
+      "id": 2
+    },
+    {
+      "action": {
+        "type": "ADD_TASK",
+        "task": {
+          "name": "aaeeeeeeeeeeeee",
+          "description": "eeeeeeeeeeeeee",
+          "created": 1590837757733,
+          "id": 4
+        }
+      },
+      "id": 3
+    },
+    {
+      "action": {
+        "type": "DELETE_TASK",
+        "taskId": 3
+      },
+      "id": 4
+    },
+    {
+      "action": {
+        "type": "DELETE_TASK",
+        "taskId": 2
+      },
+      "id": 5
+    }
+  ],
   "before_replay_tasks": []
 }

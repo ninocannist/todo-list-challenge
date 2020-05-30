@@ -55,6 +55,19 @@ const deleteTask = (state: IState, action: IAction) => {
   });
 };
 
+const deleteTaskWithoutLogging = (state: IState, action: IAction) => {
+  const tasksList = state.toDoList.toDoList;
+  const indexOfToEdit = tasksList
+    .map((e: { [key: string]: any }) => e.id)
+    .indexOf(action.actionPerformed.taskId);
+  const tasksBefore = tasksList.slice(0, indexOfToEdit);
+  const tasksAfter = tasksList.slice(indexOfToEdit + 1, tasksList.length);
+  const updatedTasksList = [...tasksBefore, ...tasksAfter];
+  return updateObject(state, {
+    toDoList: { toDoList: updatedTasksList },
+  });
+};
+
 const startRecord = (state: IState, action: IAction) => {
   return updateObject(state, {
     recording: action.recordingState,
@@ -98,6 +111,8 @@ const reducer = (state = initialState, action: IAction) => {
       return startRecord(state, action);
     case actionTypes.DELETE_ACTION:
       return deleteAction(state, action);
+    case actionTypes.DELETE_TASK_WITHOUT_LOGGING:
+      return deleteTaskWithoutLogging(state, action);
     default:
       return state;
   }
