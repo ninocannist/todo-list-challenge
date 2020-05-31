@@ -2,10 +2,10 @@ import * as actionTypes from './actionTypes';
 import { Dispatch, Action } from 'redux';
 import axios from 'axios';
 
-import dotenv from 'dotenv';
-dotenv.config();
+require('dotenv').config();
 
 const DB_URL = process.env.DB_URL || 'http://localhost:3000';
+console.log('I Process env', process.env);
 
 interface Task {
   id: number;

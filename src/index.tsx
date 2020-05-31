@@ -6,8 +6,8 @@ import { createStore, applyMiddleware, compose, Action, Store } from 'redux';
 import toDoListReducer from './store/reducers/toDoList';
 import thunk from 'redux-thunk';
 import axios from 'axios';
-import dotenv from 'dotenv';
-dotenv.config();
+
+require('dotenv').config();
 
 const DB_URL = process.env.DB_URL || 'http://localhost:3000';
 console.log('Process env', process.env);

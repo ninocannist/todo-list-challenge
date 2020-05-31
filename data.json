@@ -1,9 +1,29 @@
 {
-  "tasks": [],
+  "tasks": [
+    {
+      "name": "a",
+      "description": "a",
+      "created": 1590903725083,
+      "id": 1
+    }
+  ],
   "recording": {
     "value": 0,
     "initial_state": [],
     "actions": []
   },
-  "actions": []
+  "actions": [
+    {
+      "action": {
+        "type": "ADD_TASK",
+        "task": {
+          "name": "a",
+          "description": "a",
+          "created": 1590903725083,
+          "id": 1
+        }
+      },
+      "id": 1
+    }
+  ]
 }
