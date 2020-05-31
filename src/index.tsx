@@ -7,11 +7,8 @@ import toDoListReducer from './store/reducers/toDoList';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 
-require('dotenv').config();
-
 const DB_URL =
   process.env.DB_URL || 'https://murmuring-cove-53176.herokuapp.com';
-console.log('Process env', process.env);
 
 declare global {
   interface Window {
@@ -26,7 +23,6 @@ const rootReducer = toDoListReducer;
 axios
   .get(DB_URL + '/db/')
   .then((res) => {
-    console.log('datas: ', res.data);
     const store = createStore(
       rootReducer,
       {

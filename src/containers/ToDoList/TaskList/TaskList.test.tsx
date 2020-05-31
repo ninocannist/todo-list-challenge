@@ -12,7 +12,7 @@ describe('The scheleton is set up correctly', () => {
   test('renders learn react link', () => {
     const store = createStore(rootReducer);
     const { getByText } = render(<TaskList />);
-    const listOfTasks = getByText(/List of tasks/i);
+    const listOfTasks = getByText(/Tasks/i);
     expect(listOfTasks).toBeInTheDocument();
   });
 });

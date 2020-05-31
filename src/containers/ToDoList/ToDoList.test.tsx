@@ -10,7 +10,7 @@ describe('The scheleton is set up correctly', () => {
     expect(newTaskName).toBeInTheDocument();
     expect(newTaskDescription).toBeInTheDocument();
 
-    const listOfItems = getByText(/List of tasks/i);
+    const listOfItems = getByText(/Tasks/i);
     expect(listOfItems).toBeInTheDocument();
   });
 });

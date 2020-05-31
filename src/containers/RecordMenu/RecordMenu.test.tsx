@@ -5,7 +5,7 @@ import RecordMenu from './RecordMenu';
 describe('The scheleton is set up correctly', () => {
   test('renders learn react link', () => {
     const { getByText } = render(<RecordMenu />);
-    const recordMenu = getByText(/Play/i);
+    const recordMenu = getByText(/Replay/i);
     expect(recordMenu).toBeInTheDocument();
   });
 

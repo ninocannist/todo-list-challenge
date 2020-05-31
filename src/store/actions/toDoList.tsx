@@ -2,11 +2,8 @@ import * as actionTypes from './actionTypes';
 import { Dispatch, Action } from 'redux';
 import axios from 'axios';
 
-require('dotenv').config();
-
-const DB_URL = process.env.DB_URL || 'https://murmuring-cove-53176.herokuapp.com';
-console.log('I Process env', process.env);
-console.log('wop', process.env.REACT_APP_CLIENT_ID);
+const DB_URL =
+  process.env.DB_URL || 'https://murmuring-cove-53176.herokuapp.com';
 
 interface Task {
   id: number;
@@ -74,7 +71,6 @@ export const addTask = (taskToAdd: NewTask) => {
       .post(DB_URL + '/tasks/', taskToAdd)
       .then((response: any) => {
         const taskAdded = response.data;
-        console.log('Task Added: ', taskAdded);
         const actionPerformed = {
           type: actionTypes.ADD_TASK,
           task: taskAdded,
@@ -93,7 +89,6 @@ export const addTask = (taskToAdd: NewTask) => {
           });
       })
       .catch((error: any) => {
-        console.error('12', error);
         dispatch(resetListFailed());
       });
   };
@@ -118,7 +113,6 @@ export const updateTask = (taskToUpdate: Task) => {
       })
       .then((response: any) => {
         const fullAction = response.data;
-        console.log('action performed: ', fullAction);
         axios
           .patch(
             DB_URL + '/tasks/' + fullAction.action.task.id,
@@ -132,7 +126,6 @@ export const updateTask = (taskToUpdate: Task) => {
           });
       })
       .catch((error: any) => {
-        console.error('12', error);
         dispatch(resetListFailed());
       });
   };
@@ -163,7 +156,6 @@ export const deleteTask = (taskId: number) => {
         action: actionPerformed,
       })
       .then((response: any) => {
-        console.log('action performed: ', response.data);
         const fullAction = response.data;
         axios
           .delete(DB_URL + '/tasks/' + fullAction.action.taskId)
@@ -171,12 +163,10 @@ export const deleteTask = (taskId: number) => {
             dispatch(deleteTaskFromState(fullAction));
           })
           .catch((error: any) => {
-            console.error('12', error);
             dispatch(resetListFailed());
           });
       })
       .catch((error: any) => {
-        console.error('12', error);
         dispatch(resetListFailed());
       });
   };
@@ -188,7 +178,6 @@ export const deleteTaskWithoutLogging = (taskId: number) => {
       type: actionTypes.DELETE_TASK_WITHOUT_LOGGING,
       taskId: taskId,
     };
-    console.log('action performed: ', actionPerformed);
     const fullAction = actionPerformed;
     axios
       .delete(DB_URL + '/tasks/' + fullAction.taskId)
@@ -196,7 +185,6 @@ export const deleteTaskWithoutLogging = (taskId: number) => {
         dispatch(deleteTaskFromStateWithoutLogging(actionPerformed));
       })
       .catch((error: any) => {
-        console.error('12', error);
         dispatch(resetListFailed());
       });
   };
@@ -248,7 +236,6 @@ export const addFullTask = (task: Task) => {
       .post(DB_URL + '/tasks/', task)
       .then((response: any) => {
         const taskAdded = response.data;
-        console.log('Task Added: ', taskAdded);
         const actionPerformed = {
           type: actionTypes.ADD_TASK,
           task: taskAdded,
@@ -267,7 +254,6 @@ export const addFullTask = (task: Task) => {
           });
       })
       .catch((error: any) => {
-        console.error('12', error);
         dispatch(resetListFailed());
       });
   };

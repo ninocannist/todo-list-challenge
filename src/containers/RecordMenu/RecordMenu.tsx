@@ -191,28 +191,24 @@ class RecordMenu extends Component<IProps, IState> {
   play = () => {
     if (!this.props.recording.value) {
       this.setState({ replay: true });
-      console.log('play');
+
       this.resetList();
       setTimeout(() => {
         this.props.recording.initial_state.forEach((task) => {
           this.props.onFullTaskAdded(task);
         });
         setTimeout(() => {
-          console.log('Boh ', this.props.recording.actions);
           this.props.recording.actions.forEach(
             (action: FullAction, index: number) => {
               setTimeout(() => {
                 switch (action.action.type) {
                   case actionTypes.DELETE_TASK:
-                    console.log('S processed: ', action);
                     this.props.onDeleteTask(action.action.taskId);
                     break;
                   case actionTypes.UPDATE_TASK:
-                    console.log('S processed: ', action);
                     this.props.onUpdateTask(action.action.task);
                     break;
                   case actionTypes.ADD_TASK:
-                    console.log('S processed: ', action);
                     const newTaskToAdd = {
                       name: action.action.task.name,
                       description: action.action.task.description,
@@ -221,12 +217,10 @@ class RecordMenu extends Component<IProps, IState> {
                     this.props.onTaskAdded(newTaskToAdd);
                     break;
                   default:
-                    console.log('Not processed: ', action);
                 }
               }, 1000 * index);
             }
           );
-          console.log('sleep');
           this.setState({ replay: false });
         }, 1000);
       }, 2000);
@@ -235,17 +229,14 @@ class RecordMenu extends Component<IProps, IState> {
 
   resetList = () => {
     if (this.props.recording.value) {
-      console.log('reset 1');
       this.props.toDoList.toDoList.forEach((element: Task) => {
         this.props.onDeleteTask(element.id);
       });
     } else {
-      console.log('reset 2');
       this.props.toDoList.toDoList.forEach((element: Task) => {
         this.props.onDeleteTaskWithoutLogging(element.id);
       });
     }
-    console.log('reset 3');
     this.props.actions.forEach((element: FullAction) => {
       this.props.onDeleteAction(element.id);
     });

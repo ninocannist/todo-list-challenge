@@ -2,8 +2,211 @@
   "tasks": [],
   "recording": {
     "value": 0,
-    "initial_state": [],
-    "actions": []
+    "initial_state": [
+      {
+        "name": "a",
+        "description": "a",
+        "created": 1590930353457,
+        "id": 1
+      },
+      {
+        "name": "a",
+        "description": "a",
+        "created": 1590930354944,
+        "id": 2
+      },
+      {
+        "name": "af",
+        "description": "af",
+        "created": 1590930357241,
+        "id": 3
+      },
+      {
+        "name": "afe",
+        "description": "afe",
+        "created": 1590930360569,
+        "id": 4
+      }
+    ],
+    "actions": [
+      {
+        "action": {
+          "type": "ADD_TASK",
+          "task": {
+            "name": "t",
+            "description": "t",
+            "created": 1590930370946,
+            "id": 5
+          }
+        },
+        "id": 1
+      },
+      {
+        "action": {
+          "type": "ADD_TASK",
+          "task": {
+            "name": "te",
+            "description": "te",
+            "created": 1590930374053,
+            "id": 6
+          }
+        },
+        "id": 2
+      },
+      {
+        "action": {
+          "type": "ADD_TASK",
+          "task": {
+            "name": "tet",
+            "description": "tet",
+            "created": 1590930377529,
+            "id": 7
+          }
+        },
+        "id": 3
+      }
+    ]
   },
-  "actions": []
+  "actions": [
+    {
+      "action": {
+        "type": "ADD_TASK",
+        "task": {
+          "name": "a",
+          "description": "a",
+          "created": 1590930353457,
+          "id": 1
+        }
+      },
+      "id": 1
+    },
+    {
+      "action": {
+        "type": "ADD_TASK",
+        "task": {
+          "name": "a",
+          "description": "a",
+          "created": 1590930354944,
+          "id": 2
+        }
+      },
+      "id": 2
+    },
+    {
+      "action": {
+        "type": "ADD_TASK",
+        "task": {
+          "name": "af",
+          "description": "af",
+          "created": 1590930357241,
+          "id": 3
+        }
+      },
+      "id": 3
+    },
+    {
+      "action": {
+        "type": "ADD_TASK",
+        "task": {
+          "name": "afe",
+          "description": "afe",
+          "created": 1590930360569,
+          "id": 4
+        }
+      },
+      "id": 4
+    },
+    {
+      "action": {
+        "type": "ADD_TASK",
+        "task": {
+          "name": "t",
+          "description": "t",
+          "created": 1590930370946,
+          "id": 5
+        }
+      },
+      "id": 5
+    },
+    {
+      "action": {
+        "type": "ADD_TASK",
+        "task": {
+          "name": "te",
+          "description": "te",
+          "created": 1590930374053,
+          "id": 6
+        }
+      },
+      "id": 6
+    },
+    {
+      "action": {
+        "type": "ADD_TASK",
+        "task": {
+          "name": "tet",
+          "description": "tet",
+          "created": 1590930377529,
+          "id": 7
+        }
+      },
+      "id": 7
+    },
+    {
+      "action": {
+        "type": "DELETE_TASK",
+        "taskId": 7
+      },
+      "id": 8
+    },
+    {
+      "action": {
+        "type": "DELETE_TASK",
+        "taskId": 7
+      },
+      "id": 9
+    },
+    {
+      "action": {
+        "type": "DELETE_TASK",
+        "taskId": 6
+      },
+      "id": 10
+    },
+    {
+      "action": {
+        "type": "DELETE_TASK",
+        "taskId": 5
+      },
+      "id": 11
+    },
+    {
+      "action": {
+        "type": "DELETE_TASK",
+        "taskId": 4
+      },
+      "id": 12
+    },
+    {
+      "action": {
+        "type": "DELETE_TASK",
+        "taskId": 3
+      },
+      "id": 13
+    },
+    {
+      "action": {
+        "type": "DELETE_TASK",
+        "taskId": 2
+      },
+      "id": 14
+    },
+    {
+      "action": {
+        "type": "DELETE_TASK",
+        "taskId": 1
+      },
+      "id": 15
+    }
+  ]
 }

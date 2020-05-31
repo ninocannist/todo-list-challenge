@@ -160,58 +160,61 @@ class TaskList extends Component<IProps, IState> {
         {'toDoList' in this.props.toDoList &&
         this.props.toDoList.toDoList.length > 0 ? (
           <List>
-            {this.props.toDoList.toDoList.map((task: Task) => (
-              <ListElement key={task.id}>
-                <Label>
-                  Name:
-                  <Input
-                    placeholder='Buy groceries'
-                    value={
-                      this.state.editingTask.id === task.id
-                        ? this.state.editingTask.name
-                        : task.name
-                    }
-                    onChange={this.changeTaskName}
-                    type='text'
-                    aria-label='new-task-name-to-add'
-                    aria-required='true'
-                    name='Task Name'
-                    readOnly={this.state.editingTask.id !== task.id}
-                  />
-                </Label>
-                <Label>
-                  Description:
-                  <Input
-                    placeholder='Milk, honey, pasta'
-                    value={
-                      this.state.editingTask.id === task.id
-                        ? this.state.editingTask.description
-                        : task.description
-                    }
-                    onChange={this.changeTaskDescription}
-                    type='text'
-                    aria-label='new-task-description-to-add'
-                    aria-required='true'
-                    name='Task Description'
-                    readOnly={this.state.editingTask.id !== task.id}
-                  />
-                </Label>
-                <Label>
-                  Created:
-                  <div>{moment(task.created).fromNow()}</div>
-                </Label>
-                <Actions>
-                  {this.state.editingTask.id === task.id ? (
-                    <Edit onClick={() => this.updateTask()}>Save</Edit>
-                  ) : (
-                    <Edit onClick={() => this.editTask(task)}>Edit</Edit>
-                  )}
-                  <Delete onClick={() => this.deleteTask(task.id)}>
-                    Delete
-                  </Delete>
-                </Actions>
-              </ListElement>
-            ))}
+            {this.props.toDoList.toDoList
+              .slice(0)
+              .reverse()
+              .map((task: Task) => (
+                <ListElement key={task.id}>
+                  <Label>
+                    Name:
+                    <Input
+                      placeholder='Buy groceries'
+                      value={
+                        this.state.editingTask.id === task.id
+                          ? this.state.editingTask.name
+                          : task.name
+                      }
+                      onChange={this.changeTaskName}
+                      type='text'
+                      aria-label='new-task-name-to-add'
+                      aria-required='true'
+                      name='Task Name'
+                      readOnly={this.state.editingTask.id !== task.id}
+                    />
+                  </Label>
+                  <Label>
+                    Description:
+                    <Input
+                      placeholder='Milk, honey, pasta'
+                      value={
+                        this.state.editingTask.id === task.id
+                          ? this.state.editingTask.description
+                          : task.description
+                      }
+                      onChange={this.changeTaskDescription}
+                      type='text'
+                      aria-label='new-task-description-to-add'
+                      aria-required='true'
+                      name='Task Description'
+                      readOnly={this.state.editingTask.id !== task.id}
+                    />
+                  </Label>
+                  <Label>
+                    Created:
+                    <div>{moment(task.created).fromNow()}</div>
+                  </Label>
+                  <Actions>
+                    {this.state.editingTask.id === task.id ? (
+                      <Edit onClick={() => this.updateTask()}>Save</Edit>
+                    ) : (
+                      <Edit onClick={() => this.editTask(task)}>Edit</Edit>
+                    )}
+                    <Delete onClick={() => this.deleteTask(task.id)}>
+                      Delete
+                    </Delete>
+                  </Actions>
+                </ListElement>
+              ))}
           </List>
         ) : (
           <span>Nessun task nella lista</span>
