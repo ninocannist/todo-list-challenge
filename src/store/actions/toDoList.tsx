@@ -4,8 +4,9 @@ import axios from 'axios';
 
 require('dotenv').config();
 
-const DB_URL = process.env.DB_URL || 'http://localhost:3000';
+const DB_URL = process.env.DB_URL || 'https://murmuring-cove-53176.herokuapp.com';
 console.log('I Process env', process.env);
+console.log('wop', process.env.REACT_APP_CLIENT_ID);
 
 interface Task {
   id: number;
