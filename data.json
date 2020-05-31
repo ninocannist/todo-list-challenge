@@ -3,46 +3,7 @@
   "recording": {
     "value": 0,
     "initial_state": [],
-    "actions": [
-      {
-        "action": {
-          "type": "ADD_TASK",
-          "task": {
-            "name": "a",
-            "description": "a",
-            "created": 1590849305636,
-            "id": 1
-          }
-        },
-        "id": 1
-      },
-      {
-        "action": {
-          "type": "UPDATE_TASK",
-          "task": {
-            "id": 1,
-            "name": "af",
-            "description": "af",
-            "created": 1590849305636
-          }
-        },
-        "id": 2
-      }
-    ]
+    "actions": []
   },
-  "actions": [
-    {
-      "action": {
-        "type": "ADD_TASK",
-        "task": {
-          "name": "a",
-          "description": "f",
-          "created": 1590853674811,
-          "id": 2
-        }
-      },
-      "id": 3
-    }
-  ],
-  "before_replay_tasks": []
+  "actions": []
 }

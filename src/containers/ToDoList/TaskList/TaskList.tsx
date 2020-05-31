@@ -76,6 +76,11 @@ const Edit = styled.button`
   }
 `;
 
+const FullList = styled.div`
+  grid-area: list;
+  padding: 10px 20px;
+`;
+
 const Delete = styled.button`
   margin: 5px;
   padding: 6px 11px;
@@ -150,7 +155,7 @@ class TaskList extends Component<IProps, IState> {
 
   render() {
     return (
-      <div>
+      <FullList>
         <h3>Tasks</h3>
         {'toDoList' in this.props.toDoList &&
         this.props.toDoList.toDoList.length > 0 ? (
@@ -211,7 +216,7 @@ class TaskList extends Component<IProps, IState> {
         ) : (
           <span>Nessun task nella lista</span>
         )}
-      </div>
+      </FullList>
     );
   }
 }

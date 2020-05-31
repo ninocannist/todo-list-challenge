@@ -2,6 +2,11 @@ import * as actionTypes from './actionTypes';
 import { Dispatch, Action } from 'redux';
 import axios from 'axios';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
+const DB_URL = process.env.DB_URL || 'http://localhost:3000';
+
 interface Task {
   id: number;
   name: string;
@@ -43,7 +48,7 @@ export const resetListFailed = () => {
 export const initList = () => {
   return (dispatch: Dispatch) => {
     axios
-      .patch('http://localhost:3000/tasks/', {
+      .patch(DB_URL + '/tasks/', {
         toDoList: { toDoList: {} },
       })
       .then((response: any) => {
@@ -65,7 +70,7 @@ export const addTaskToState = (fullAction: FullAction) => {
 export const addTask = (taskToAdd: NewTask) => {
   return (dispatch: Dispatch) => {
     axios
-      .post('http://localhost:3000/tasks/', taskToAdd)
+      .post(DB_URL + '/tasks/', taskToAdd)
       .then((response: any) => {
         const taskAdded = response.data;
         console.log('Task Added: ', taskAdded);
@@ -74,7 +79,7 @@ export const addTask = (taskToAdd: NewTask) => {
           task: taskAdded,
         };
         axios
-          .post('http://localhost:3000/actions/', {
+          .post(DB_URL + '/actions/', {
             action: actionPerformed,
           })
 
@@ -107,7 +112,7 @@ export const updateTask = (taskToUpdate: Task) => {
       task: taskToUpdate,
     };
     axios
-      .post('http://localhost:3000/actions/', {
+      .post(DB_URL + '/actions/', {
         action: actionPerformed,
       })
       .then((response: any) => {
@@ -115,7 +120,7 @@ export const updateTask = (taskToUpdate: Task) => {
         console.log('action performed: ', fullAction);
         axios
           .patch(
-            'http://localhost:3000/tasks/' + fullAction.action.task.id,
+            DB_URL + '/tasks/' + fullAction.action.task.id,
             fullAction.action.task
           )
           .then((response: any) => {
@@ -153,14 +158,14 @@ export const deleteTask = (taskId: number) => {
       taskId: taskId,
     };
     axios
-      .post('http://localhost:3000/actions/', {
+      .post(DB_URL + '/actions/', {
         action: actionPerformed,
       })
       .then((response: any) => {
         console.log('action performed: ', response.data);
         const fullAction = response.data;
         axios
-          .delete('http://localhost:3000/tasks/' + fullAction.action.taskId)
+          .delete(DB_URL + '/tasks/' + fullAction.action.taskId)
           .then(() => {
             dispatch(deleteTaskFromState(fullAction));
           })
@@ -185,7 +190,7 @@ export const deleteTaskWithoutLogging = (taskId: number) => {
     console.log('action performed: ', actionPerformed);
     const fullAction = actionPerformed;
     axios
-      .delete('http://localhost:3000/tasks/' + fullAction.taskId)
+      .delete(DB_URL + '/tasks/' + fullAction.taskId)
       .then(() => {
         dispatch(deleteTaskFromStateWithoutLogging(actionPerformed));
       })
@@ -206,7 +211,7 @@ export const startRecording = (recordingState: Recording) => {
 export const record = (recordingState: Recording) => {
   return (dispatch: Dispatch) => {
     axios
-      .patch('http://localhost:3000/recording/', recordingState)
+      .patch(DB_URL + '/recording/', recordingState)
       .then((response: any) => {
         dispatch(startRecording(response.data));
       })
@@ -226,7 +231,7 @@ export const deleteActionFromState = (actionId: number) => {
 export const deleteAction = (actionId: number) => {
   return (dispatch: Dispatch) => {
     axios
-      .delete('http://localhost:3000/actions/' + actionId)
+      .delete(DB_URL + '/actions/' + actionId)
       .then((response: any) => {
         dispatch(deleteActionFromState(actionId));
       })
@@ -239,7 +244,7 @@ export const deleteAction = (actionId: number) => {
 export const addFullTask = (task: Task) => {
   return (dispatch: Dispatch) => {
     axios
-      .post('http://localhost:3000/tasks/', task)
+      .post(DB_URL + '/tasks/', task)
       .then((response: any) => {
         const taskAdded = response.data;
         console.log('Task Added: ', taskAdded);
@@ -248,7 +253,7 @@ export const addFullTask = (task: Task) => {
           task: taskAdded,
         };
         axios
-          .post('http://localhost:3000/actions/', {
+          .post(DB_URL + '/actions/', {
             action: actionPerformed,
           })
 

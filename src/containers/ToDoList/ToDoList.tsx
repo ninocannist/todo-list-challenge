@@ -10,10 +10,10 @@ const List = styled.div`
 
 function ToDoList() {
   return (
-    <List>
+    <>
       <AddNewItem />
       <TaskList />
-    </List>
+    </>
   );
 }
 

@@ -11,6 +11,9 @@ module.exports = {
     path: path.join(__dirname, '/build'),
     filename: 'bundle.min.js',
   },
+  node: {
+    fs: 'empty',
+  },
   module: {
     rules: [
       {

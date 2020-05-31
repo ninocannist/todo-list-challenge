@@ -20,7 +20,13 @@ interface NewTask {
   created: number;
 }
 
-const Box = styled.div``;
+const Box = styled.div`
+  grid-area: addnew;
+  padding: 10px 20px;
+  @media (min-width: 768px) {
+    padding: 10px;
+  }
+`;
 
 const Form = styled.div`
   background-color: white;
@@ -100,6 +106,7 @@ class AddNewItem extends Component<IProps, IState> {
               aria-label='new-task-name-to-add'
               aria-required='true'
               name='Task Name'
+              autoComplete='off'
             />
           </Label>
           <Label>
@@ -112,6 +119,7 @@ class AddNewItem extends Component<IProps, IState> {
               aria-label='new-task-description-to-add'
               aria-required='true'
               name='Task Description'
+              autoComplete='off'
             />
           </Label>
           <Button onClick={this.generateTask}>Add Task +</Button>

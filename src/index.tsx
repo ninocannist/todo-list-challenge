@@ -6,6 +6,11 @@ import { createStore, applyMiddleware, compose, Action, Store } from 'redux';
 import toDoListReducer from './store/reducers/toDoList';
 import thunk from 'redux-thunk';
 import axios from 'axios';
+import dotenv from 'dotenv';
+dotenv.config();
+
+const DB_URL = process.env.DB_URL || 'http://localhost:3000';
+console.log('Process env', process.env);
 
 declare global {
   interface Window {
@@ -18,7 +23,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = toDoListReducer;
 
 axios
-  .get('http://localhost:3000/db/')
+  .get(DB_URL + '/db/')
   .then((res) => {
     console.log('datas: ', res.data);
     const store = createStore(

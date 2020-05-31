@@ -12,6 +12,7 @@ const Actions = styled.div`
   grid-template-columns: auto auto auto;
   height: 100px;
   align-items: center;
+  grid-area: record;
 `;
 
 interface IState {
@@ -222,13 +223,13 @@ class RecordMenu extends Component<IProps, IState> {
                   default:
                     console.log('Not processed: ', action);
                 }
-              }, 2000 * index);
+              }, 1000 * index);
             }
           );
           console.log('sleep');
           this.setState({ replay: false });
-        }, 3000);
-      }, 3000);
+        }, 1000);
+      }, 2000);
     }
   };
 
@@ -278,14 +279,17 @@ class RecordMenu extends Component<IProps, IState> {
     return (
       <Actions>
         {this.state.replay ? (
-          <Play>Playing</Play>
+          <Play className='Rep'>Playing</Play>
         ) : (
           <Play onClick={this.play}>Replay</Play>
         )}
 
         <Reset onClick={this.resetList}>Reset</Reset>
 
-        <Record onClick={this.record}>
+        <Record
+          className={this.props.recording.value ? 'Rec' : ''}
+          onClick={this.record}
+        >
           {this.props.recording.value ? 'Stop' : 'Record'}
         </Record>
       </Actions>
